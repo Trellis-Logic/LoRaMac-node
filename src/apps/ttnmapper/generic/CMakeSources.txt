@@ -1,0 +1,2 @@
+set(APP_DIR ${SOURCE_DIR}/apps/ttnmapper/generic)
+set(APP_SOURCES ${APP_DIR}/main.c)

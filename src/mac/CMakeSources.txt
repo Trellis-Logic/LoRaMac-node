@@ -1,0 +1,5 @@
+set(MAC_DIR ${SOURCE_DIR}/mac)
+include(${SOURCE_DIR}/system/crypto/CMakeSources.txt)
+set(SYSTEM_DIR ${SOURCE_DIR}/system)
+set(MAC_SOURCES ${MAC_DIR}/LoraMac.c ${MAC_DIR}/LoraMac-api-v3.c ${MAC_DIR}/LoRaMacCrypto.c ${CRYPTO_SOURCES} ${SYSTEM_DIR}/timer.c)
+include_directories(${CRYPTO_DIR} ${SYSTEM_DIR})
