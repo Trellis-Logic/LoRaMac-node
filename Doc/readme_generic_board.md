@@ -35,4 +35,4 @@ The cmake directory can be used with the generic target for any cmake supported 
 	```
 	2. Install cmake on the pi using `sudo apt-get install cmake`
 	3. Install [WiringPi](http://wiringpi.com/)
-	4. Define your GPIO mapping in boards/generic/Pi/gpio-pins.h.  The default pin connections are configured as shown in [this diagram](http://www.digikey.com/schemeit/project/pi-to-inair9b-connection-Q6JIJC8202QG/) for a [Modtronics InAir9](http://modtronix.com/inair9.html).
+	4. Define your GPIO mapping in boards/generic/Pi/gpio-pins.h.  The default pin connections are configured as shown in [this diagram](http://www.digikey.com/schemeit/project/pi-to-inair9b-connection-Q6JIJC8202QG/) for a [Modtronics InAir9b](http://modtronix.com/inair9.html).
