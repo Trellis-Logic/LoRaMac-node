@@ -6,7 +6,7 @@
  */
 
 #if BOARD_GPIO_RASPBERRY_PI
-#include "Pi\gpio-board-pi.c"
+#include "Pi/gpio-board-pi.c"
 #elif BOARD_GPIO_UNDEFINED
 #warning "Using undefined BOARD_GPIO, link step will fail"
 #else

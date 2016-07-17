@@ -9,7 +9,7 @@
 #define SRC_BOARDS_GENERIC_SPI_BOARD_H_
 
 #if BOARD_GPIO_RASPBERRY_PI
-#include "pi\spi-board-pi.h"
+#include "pi/spi-board-pi.h"
 #elif BOARD_GPIO_UNDEFINED
 #warning "Using undefined GPIO, link step will fail"
 typedef int SPI_HandleTypeDef;

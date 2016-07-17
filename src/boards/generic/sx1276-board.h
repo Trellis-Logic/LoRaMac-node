@@ -80,6 +80,7 @@ void SX1276IoIrqInit( DioIrqHandler **irqHandlers );
 void SX1276SetAntSw( uint8_t rxTx );
 void SX1276SetAntSwLowPower( bool status );
 uint8_t SX1276GetPaSelect( uint32_t channel );
+void SX1276IoInit( void );
 
 #endif /* SRC_BOARDS_GENERIC_SX1276_BOARD_H_ */
 

@@ -19,7 +19,10 @@
 	PI_GPIO_3=3,\
 	PI_GPIO_4=4,\
 	PI_GPIO_5=5,\
-	PI_GPIO_6=5
+	PI_GPIO_6=6,\
+	PI_GPIO_7=7,\
+	PI_GPIO_8=8,\
+	PI_GPIO_9=9
 
 
 

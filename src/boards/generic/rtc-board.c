@@ -47,11 +47,19 @@ TimerTime_t RtcGetTimerValue( void )
 void HAL_Delay(uint32_t Delay)
 {
 	TimerTime_t startTime=RtcGetTimerValue();
-	TimerTime_t currentTime=RtcGetTimerValue();
-	while( currentTime - startTime < Delay )
+	bool exit=false;
+	do
 	{
-		BoardDelay();
-	}
+		TimerTime_t currentTime=RtcGetTimerValue();
+		if( currentTime - startTime < Delay )
+		{
+			BoardDelay();
+		}
+		else
+		{
+			exit=true;
+		}
+	}while( !exit );
 }
 
 void DelayMs(uint32_t Delay)

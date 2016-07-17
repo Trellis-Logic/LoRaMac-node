@@ -5,9 +5,11 @@
  *      Author: Dan
  */
 
-#if 0
+
+#include "board.h"
 #include <wiringPi.h>
 #include "gpio.h"
+#include "Log.h"
 
 void GpioMcuInitialize(void)
 {
@@ -19,7 +21,7 @@ void GpioMcuInit( Gpio_t *obj, PinNames pin, PinModes mode, PinConfigs config, P
     obj->pin = pin;
 	if( mode == PIN_INPUT || mode == PIN_OUTPUT )
 	{
-		piMode= PIN_INPUT ? INPUT : OUTPUT
+		piMode= PIN_INPUT ? INPUT : OUTPUT;
 		pinMode(pin,piMode);
 		if( type ==  PIN_PULL_DOWN )
 		{
@@ -44,7 +46,6 @@ void GpioMcuInit( Gpio_t *obj, PinNames pin, PinModes mode, PinConfigs config, P
 
 void GpioMcuSetInterrupt( Gpio_t *obj, IrqModes irqMode, IrqPriorities irqPriority, GpioIrqHandler *irqHandler )
 {
-	int irqMode=INT_EDGE_SETUP;
 	switch( irqMode )
 	{
 		case IRQ_RISING_EDGE:
@@ -82,4 +83,3 @@ void GpioMcuToggle( Gpio_t *obj )
 	GpioMcuWrite(obj,GpioMcuRead(obj)==0);
 }
 
-#endif

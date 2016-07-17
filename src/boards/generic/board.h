@@ -10,8 +10,9 @@
 #ifndef __GENERIC_BOARD_H__
 #define __GENERIC_BOARD_H__
 
-#include <sys/types.h>	// uint_xx typedefs
+#include <stdint.h>		// uint_xx typedefs
 #include <stdio.h>		// printf
+
 #include "utilities.h"
 
 
@@ -30,7 +31,7 @@ extern void __disable_irq(void);
 /**
  * Use printf for logging
  */
-#define BOARD_LOGGER(level,format,...)	printf(#level ":" format , ##__VA_ARGS__);
+#define BOARD_LOGGER(level,format,...)	printf(#level ":" format "\n" , ##__VA_ARGS__);
 
 /**
  * TODO: move this to a shared definitions file

@@ -11,7 +11,7 @@
 #include "spi-board.h"
 
 #if BOARD_GPIO_RASPBERRY_PI
-#include "pi\spi-board-pi.c"
+#include "pi/spi-board-pi.c"
 #elif BOARD_GPIO_UNDEFINED
 #warning "Using UNDEFINED board GPIO, link step will fail"
 #else
@@ -20,9 +20,18 @@
 
 void SpiInit( Spi_t *obj, PinNames mosi, PinNames miso, PinNames sclk, PinNames nss )
 {
-    GpioInit( &obj->Mosi, mosi, PIN_ALTERNATE_FCT, PIN_PUSH_PULL, PIN_PULL_DOWN, 0 );
-    GpioInit( &obj->Miso, miso, PIN_ALTERNATE_FCT, PIN_PUSH_PULL, PIN_PULL_DOWN, 0 );
-    GpioInit( &obj->Sclk, sclk, PIN_ALTERNATE_FCT, PIN_PUSH_PULL, PIN_PULL_DOWN, 0 );
+    if( mosi != NC )
+    {
+    	GpioInit( &obj->Mosi, mosi, PIN_ALTERNATE_FCT, PIN_PUSH_PULL, PIN_PULL_DOWN, 0 );
+    }
+    if( miso != NC )
+    {
+    	GpioInit( &obj->Miso, miso, PIN_ALTERNATE_FCT, PIN_PUSH_PULL, PIN_PULL_DOWN, 0 );
+    }
+    if( sclk != NC )
+    {
+    	GpioInit( &obj->Sclk, sclk, PIN_ALTERNATE_FCT, PIN_PUSH_PULL, PIN_PULL_DOWN, 0 );
+    }
 
     if( nss != NC )
     {

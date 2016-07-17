@@ -91,11 +91,14 @@ int main( void )
 	uint8_t NwkSKey[] = TTN_MAPPER_NWK_SKEY;
 	uint8_t AppSKey[] = TTN_MAPPER_APP_SKEY;
 	uint32_t DevAddr = TTN_MAPPER_ADDR;
+	LOG(Info,"Initializing MCU");
 	BoardInitMcu( );
+	LOG(Info,"Initializing Peripherals");
     BoardInitPeriph( );
 
 	LoRaMacPrimitives_t LoRaMacPrimitives;
 	LoRaMacCallback_t LoRaMacCallbacks;
+	LOG(Info,"Initializing MAC");
 	LoRaMacStatus_t status = InitializeMac(&LoRaMacPrimitives,&LoRaMacCallbacks);
 	if(  status == LORAMAC_STATUS_OK )
 	{
@@ -103,6 +106,7 @@ int main( void )
 		//status = ActivateByPersonalization(NwkSKey,AppSKey,DevAddr);
 		LoRaMacInitNwkIds( LORAWAN_NETWORK_ID, DevAddr, NwkSKey, AppSKey );
 
+		LOG(Info,"Joined network, starting transmit");
 		// LoRaWAN node has joined the network
 	    {
 			static uint8_t AppPort = 2;
@@ -115,18 +119,31 @@ int main( void )
 			 * See see https://github.com/jpmeijers/ttnmapperarduino/blob/master/TXfastViaTTN/TXfastViaTTN.ino
 			 * Send a single byte "!" each millisecond
 			 */
-			AppData[0]="!";
-			uint8_t sendFrameStatus=0;
+			AppData[0]=(uint8_t)'!';
+			bool exit=false;
 			do
 			{
+				uint8_t sendFrameStatus=0;
 				sendFrameStatus = LoRaMacSendFrame( AppPort, AppData, 1 );
 				if( sendFrameStatus != 0 )
 				{
-					LOG(Error,"LoRaMacSendFrame failed with error %d",sendFrameStatus);
+					if( sendFrameStatus == 1 )
+					{
+						LOG(Info,"LoRaMacSendFrame returned status busy, retrying");
+					}
+					else
+					{
+						LOG(Error,"LoRaMacSendFrame failed with error %d",sendFrameStatus);
+						exit=true;
+					}
 				}
-				DelayMs(200);
-			}while (sendFrameStatus == 0);
+				DelayMs(1000);
+			}while (!exit);
 		}
+	}
+	else
+	{
+		LOG(Error,"InitializeMac failed with status %d",status);
 	}
 }
 

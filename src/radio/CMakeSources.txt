@@ -11,3 +11,5 @@ endif()
 set(SYSTEM_DIR ${SOURCE_DIR}/system)
 set(RADIO_SOURCES ${RADIO_BOARD_SOURCES}  ${SYSTEM_DIR}/gpio.c ${SYSTEM_DIR}/timer.c)
 include_directories(${RADIO_DIR_BOARD} ${SYSTEM_DIR})
+# sx1276 requires math libraries for round, ceil, floor
+SET(RADIO_LIBS m)

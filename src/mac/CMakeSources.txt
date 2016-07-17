@@ -1,3 +1,5 @@
+# LoRaMac.c uses for loop initial declarations
+use_c99()
 set(MAC_DIR ${SOURCE_DIR}/mac)
 include(${SOURCE_DIR}/system/crypto/CMakeSources.txt)
 set(SYSTEM_DIR ${SOURCE_DIR}/system)
