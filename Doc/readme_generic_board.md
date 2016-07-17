@@ -28,11 +28,11 @@ The cmake directory can be used with the generic target for any cmake supported 
 4. Supported Target Hardware
 ----------------
    1. Raspberry Pi Target
-	To configure the Raspberry Pi target, ensure CMakeLists.txt uses
+	1. To configure the Raspberry Pi target, ensure CMakeLists.txt uses
 	```
 	set(BOARD_GPIO "RASPBERRY_PI")
 	set(BOARD_RTC "USE_POSIX_TIMER")
 	```
-	Install cmake on the pi using `sudo apt-get install cmake`
-	Install [WiringPi](http://wiringpi.com/)
-	Define your GPIO mapping in boards/generic/Pi/gpio-pins.h.  The default pin connections are configured as shown in [this diagram](http://www.digikey.com/schemeit/project/pi-to-inair9b-connection-Q6JIJC8202QG/) for a [Modtronics InAir9](http://modtronix.com/inair9.html).
+	2. Install cmake on the pi using `sudo apt-get install cmake`
+	3. Install [WiringPi](http://wiringpi.com/)
+	4. Define your GPIO mapping in boards/generic/Pi/gpio-pins.h.  The default pin connections are configured as shown in [this diagram](http://www.digikey.com/schemeit/project/pi-to-inair9b-connection-Q6JIJC8202QG/) for a [Modtronics InAir9](http://modtronix.com/inair9.html).
