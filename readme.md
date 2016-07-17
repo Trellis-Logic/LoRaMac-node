@@ -106,8 +106,9 @@ platforms are:
         SDCARD  : No
         EXTENSION HEADER : Yes, all IMST iM880A module pins
         REMARK  : None
+     
      - Generic Targets (including Raspberry Pi based platforms)
-          Refer to the Doc/readme_generic_board.md file for more information.
+        Refer to the Doc/readme_generic_board.md file for more information.
 
 5. Usage
 ---------
