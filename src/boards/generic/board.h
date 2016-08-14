@@ -89,6 +89,7 @@ void DelayMs(uint32_t ms);
 #include "utilities.h"
 
 uint8_t GetBoardPowerSource( void );
+void DumpRadioRegs( void );
 
 //TODO: Define assertions for your platform
 #ifndef assert_param

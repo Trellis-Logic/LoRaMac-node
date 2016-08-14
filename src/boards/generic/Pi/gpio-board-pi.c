@@ -46,24 +46,27 @@ void GpioMcuInit( Gpio_t *obj, PinNames pin, PinModes mode, PinConfigs config, P
 
 void GpioMcuSetInterrupt( Gpio_t *obj, IrqModes irqMode, IrqPriorities irqPriority, GpioIrqHandler *irqHandler )
 {
-	switch( irqMode )
+	if( irqHandler != NULL )
 	{
-		case IRQ_RISING_EDGE:
-			irqMode=INT_EDGE_RISING;
-			break;
-		case IRQ_FALLING_EDGE:
-			irqMode=INT_EDGE_FALLING;
-			break;
-		case IRQ_RISING_FALLING_EDGE:
-			irqMode=INT_EDGE_BOTH;
-			break;
-		default:
-			LOG(Warn,"Unhandled irqMode %d for pin %d, ignoring",irqMode,obj->pin);
-			break;
-	}
-	if( irqMode != INT_EDGE_SETUP )
-	{
-		wiringPiISR (obj->pin, irqMode, irqHandler);
+		switch( irqMode )
+		{
+			case IRQ_RISING_EDGE:
+				irqMode=INT_EDGE_RISING;
+				break;
+			case IRQ_FALLING_EDGE:
+				irqMode=INT_EDGE_FALLING;
+				break;
+			case IRQ_RISING_FALLING_EDGE:
+				irqMode=INT_EDGE_BOTH;
+				break;
+			default:
+				LOG(Warn,"Unhandled irqMode %d for pin %d, ignoring",irqMode,obj->pin);
+				break;
+		}
+		if( irqMode != INT_EDGE_SETUP )
+		{
+			wiringPiISR (obj->pin, irqMode, irqHandler);
+		}
 	}
 }
 

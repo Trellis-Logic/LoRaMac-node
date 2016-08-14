@@ -10,6 +10,7 @@
 #include "board.h"
 #include "radio.h"
 #include "rtc-board.h"
+#include "Log.h"
 
 const struct Radio_s Radio = RADIO_CALLBACKS;
 
@@ -44,4 +45,11 @@ uint8_t BoardGetBatteryLevel( void )
 	return 254;
 }
 
-
+void DumpRadioRegs( void )
+{
+	int i=0;
+	for ( i=0; i<0x71; i++ )
+	{
+		LOG(Info,"Register %d : 0x%x",i,Radio.Read(i));
+	}
+}
