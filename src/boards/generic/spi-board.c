@@ -11,7 +11,7 @@
 #include "spi-board.h"
 
 #if BOARD_GPIO_RASPBERRY_PI
-#include "pi/spi-board-pi.c"
+#include "Pi/spi-board-pi.c"
 #elif BOARD_GPIO_UNDEFINED
 #warning "Using UNDEFINED board GPIO, link step will fail"
 #else
