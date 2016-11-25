@@ -1,0 +1,14 @@
+set(BOARD_DIR ${SOURCE_DIR}/boards/generic)
+set(BOARD_SOURCES 
+	${BOARD_DIR}/board.c
+	${BOARD_DIR}/gpio-board.c
+	${BOARD_DIR}/rtc-board.c
+	${BOARD_DIR}/spi-board.c
+	${BOARD_DIR}/sx1276-board.c
+	${BOARD_DIR}/utilities.c)
+
+if(BOARD_GPIO STREQUAL "RASPBERRY_PI")
+find_package(WiringPi REQUIRED)
+include_directories(${WiringPi_INCLUDE_DIRS})
+set(BOARD_LIBS ${WIRINGPI_LIBRARIES})
+endif()

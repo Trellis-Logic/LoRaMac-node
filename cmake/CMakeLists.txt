@@ -1,0 +1,45 @@
+cmake_minimum_required(VERSION 2.8.9)
+
+# See notes at http://stackoverflow.com/questions/24840030/forcing-c99-in-cmake-to-use-for-loop-initial-declaration
+# for dealing with code that must use C99 (LoRaMac.c uses for loop initial declarations)
+macro(use_c99)
+  if (CMAKE_VERSION VERSION_LESS "3.1")
+    if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
+      set (CMAKE_C_FLAGS "--std=gnu99 ${CMAKE_C_FLAGS}")
+    endif ()
+  else ()
+    set (CMAKE_C_STANDARD 99)
+  endif ()
+endmacro(use_c99)
+
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/modules)
+set(CMAKE_REQUIRED_INCLUDES stdint.h)
+project(LoRaMac-node)
+
+set(APP "ttnmapper")
+include_directories(../src)
+set(BOARD "generic")
+set(BOARD_RADIO "SX1276")
+# Use UNDEFINED to test compile on non raspberry pi platforms
+# set(BOARD_GPIO "UNDEFINED")
+set(BOARD_GPIO "RASPBERRY_PI")
+set(BOARD_RTC "USE_POSIX_TIMER")
+set(BAND_USED "USE_BAND_915")
+set(SOURCE_DIR "../src")
+include(${SOURCE_DIR}/apps/${APP}/${BOARD}/CMakeSources.txt)
+include(${SOURCE_DIR}/boards/${BOARD}/CMakeSources.txt)
+include(${SOURCE_DIR}/radio/CMakeSources.txt)
+include(${SOURCE_DIR}/mac/CMakeSources.txt)
+include(${SOURCE_DIR}/system/crypto/CMakeSources.txt)
+add_definitions(-DBOARD_RADIO_${BOARD_RADIO}=1)
+add_definitions(-DBOARD_GPIO_${BOARD_GPIO}=1)
+add_definitions(-DBOARD_RTC_${BOARD_RTC}=1)
+add_definitions(-D${BAND_USED}=1)
+
+include_directories(${APP_DIR} ${BOARD_DIR} ${RADIO_DIR} ${MAC_DIR})
+set(SOURCES ${APP_SOURCES} ${BOARD_SOURCES} ${RADIO_SOURCES} ${MAC_SOURCES} ${CRYPTO_SRCS})
+list(REMOVE_DUPLICATES SOURCES)
+
+add_executable(${APP} ${SOURCES})
+target_link_libraries(${APP} ${BOARD_LIBS} ${RADIO_LIBS})

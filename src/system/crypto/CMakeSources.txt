@@ -1,0 +1,2 @@
+set(CRYPTO_DIR ${SOURCE_DIR}/system/crypto)
+set(CRYPTO_SRCS ${CRYPTO_DIR}/aes.c ${CRYPTO_DIR}/cmac.c)
