@@ -96,7 +96,7 @@ void DumpRadioRegs( void );
 #define assert_param(unused)
 #endif
 
-#define __enable_irq()
+extern void __enable_irq();
 
 #endif /* __GENERIC_BOARD_H__ */
 

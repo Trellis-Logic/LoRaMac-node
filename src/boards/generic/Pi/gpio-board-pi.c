@@ -10,6 +10,7 @@
 #include <wiringPi.h>
 #include "gpio.h"
 #include "Log.h"
+#include "../posix/interrupt-simulate-posix.h"
 
 void GpioMcuInitialize(void)
 {
@@ -65,7 +66,7 @@ void GpioMcuSetInterrupt( Gpio_t *obj, IrqModes irqMode, IrqPriorities irqPriori
 		}
 		if( irqMode != INT_EDGE_SETUP )
 		{
-			wiringPiISR (obj->pin, irqMode, irqHandler);
+			wiringPiISR (obj->pin, irqMode, interrupt_simulate_map_next_irq(irqHandler));
 		}
 	}
 }

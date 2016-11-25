@@ -14,10 +14,6 @@
 
 const struct Radio_s Radio = RADIO_CALLBACKS;
 
-void __disable_irq(void)
-{
-
-}
 
 void BoardInitMcu(void)
 {

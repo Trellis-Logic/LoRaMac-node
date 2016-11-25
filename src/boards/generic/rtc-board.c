@@ -15,6 +15,7 @@
 
 
 #if BOARD_RTC_USE_POSIX_TIMER
+#include "posix/interrupt-simulate-posix.c"
 #include "posix/rtc-board-posix.c"
 #else
 #error "Please define BOARD_RTC_ macro based on contents in rtc-board.c or define a new one"
@@ -24,14 +25,25 @@ struct RtcAlarm
 {
 	bool	isSet;
 	TimerTime_t	value;
+	func_ptr_void interruptPtr;
 };
 
 struct RtcAlarm RtcAlarm;
+
+void RTC_Alarm_IRQHandler( int unused )
+{
+	(*RtcAlarm.interruptPtr)();
+}
+void RTC_Alarm_IRQHandlerVoid( void )
+{
+	TimerIrqHandler();
+}
 
 void RtcInit(void)
 {
 	RtcResetStartupTimeReference();
 	memset(&RtcAlarm,0,sizeof(RtcAlarm));
+	RtcAlarm.interruptPtr=interrupt_simulate_map_next_irq(RTC_Alarm_IRQHandlerVoid);
 }
 
 
@@ -92,10 +104,7 @@ TimerTime_t RtcComputeElapsedTime( TimerTime_t eventInTime )
 }
 
 
-void RTC_Alarm_IRQHandler( int unused )
-{
-    TimerIrqHandler( );
-}
+
 
 void RtcSetTimeout( uint32_t timeout )
 {
