@@ -138,7 +138,11 @@ int main( void )
 						exit=true;
 					}
 				}
-				DelayMs(1000);
+				else
+				{
+					LOG(Info,"LoRaMacSendFrame successfully sent frame");
+				}
+				DelayMs(4000);
 			}while (!exit);
 		}
 	}

@@ -46,6 +46,6 @@ void DumpRadioRegs( void )
 	int i=0;
 	for ( i=0; i<0x71; i++ )
 	{
-		LOG(Info,"Register %d : 0x%x",i,Radio.Read(i));
+		LOG(Info,"Register 0x%x : 0x%x",i,Radio.Read(i));
 	}
 }
