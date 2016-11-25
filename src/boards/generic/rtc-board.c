@@ -24,7 +24,8 @@
 struct RtcAlarm
 {
 	bool	isSet;
-	TimerTime_t	value;
+	TimerTime_t	setTimestamp;
+	TimerTime_t	alarmTimestamp;
 	func_ptr_void interruptPtr;
 };
 
@@ -84,7 +85,8 @@ TimerTime_t RtcGetElapsedAlarmTime( void )
 	TimerTime_t elapsedTime=0;
 	if( RtcAlarm.isSet )
 	{
-		elapsedTime=RtcGetTimerValue()-RtcAlarm.value;
+		TimerTime_t lastTime=RtcGetTimerValue();
+		elapsedTime=lastTime-RtcAlarm.setTimestamp;
 	}
 	else
 	{
@@ -108,8 +110,9 @@ TimerTime_t RtcComputeElapsedTime( TimerTime_t eventInTime )
 
 void RtcSetTimeout( uint32_t timeout )
 {
+	RtcAlarm.setTimestamp=RtcGetTimerValue();
+	RtcAlarm.alarmTimestamp=RtcAlarm.setTimestamp+timeout;
 	RtcAlarm.isSet=true;
-	RtcAlarm.value=RtcComputeFutureEventTime(timeout);
 	RtcStartWakeUpAlarm(timeout,RTC_Alarm_IRQHandler);
 }
 
