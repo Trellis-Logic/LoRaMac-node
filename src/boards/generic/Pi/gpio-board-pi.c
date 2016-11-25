@@ -9,7 +9,7 @@
 #include "board.h"
 #include <wiringPi.h>
 #include "gpio.h"
-#include "Log.h"
+#include "log.h"
 
 void GpioMcuInitialize(void)
 {
