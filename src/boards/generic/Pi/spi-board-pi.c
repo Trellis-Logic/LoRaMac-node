@@ -6,7 +6,7 @@
  */
 
 #include "board.h"
-#include "Log.h"
+#include "log.h"
 #include <wiringPiSPI.h>
 #include <errno.h>
 
