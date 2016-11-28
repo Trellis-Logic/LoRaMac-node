@@ -89,13 +89,14 @@ void DelayMs(uint32_t ms);
 #include "utilities.h"
 
 uint8_t GetBoardPowerSource( void );
+void DumpRadioRegs( void );
 
 //TODO: Define assertions for your platform
 #ifndef assert_param
 #define assert_param(unused)
 #endif
 
-#define __enable_irq()
+extern void __enable_irq();
 
 #endif /* __GENERIC_BOARD_H__ */
 

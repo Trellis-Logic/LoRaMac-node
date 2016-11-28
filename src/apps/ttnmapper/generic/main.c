@@ -100,6 +100,7 @@ int main( void )
 	LoRaMacCallback_t LoRaMacCallbacks;
 	LOG(Info,"Initializing MAC");
 	LoRaMacStatus_t status = InitializeMac(&LoRaMacPrimitives,&LoRaMacCallbacks);
+	DumpRadioRegs();
 	if(  status == LORAMAC_STATUS_OK )
 	{
 		const int LORAWAN_NETWORK_ID=0;
@@ -137,7 +138,11 @@ int main( void )
 						exit=true;
 					}
 				}
-				DelayMs(1000);
+				else
+				{
+					LOG(Info,"LoRaMacSendFrame successfully sent frame");
+				}
+				DelayMs(4000);
 			}while (!exit);
 		}
 	}

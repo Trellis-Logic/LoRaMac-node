@@ -21,8 +21,9 @@
 #define RADIO_DIO_4                         NC	// not connected on inAir9B
 #define RADIO_DIO_5                         NC	// not connected on inAir9B
 #define RADIO_MOSI							NC	// IO initialized automatically for SPI pins on Raspberry Pi
-#define RADIO_MISO							NC
-#define RADIO_SCLK							NC
+#define RADIO_MISO							NC	// IO initialized automatically for SPI pins on Raspberry Pi
+#define RADIO_SCLK							NC	// IO initialized automatically for SPI pins on Raspberry Pi
+#define RADIO_NSS							PI_GPIO_7
 
 /**
  * Use SPI port 0 by default
