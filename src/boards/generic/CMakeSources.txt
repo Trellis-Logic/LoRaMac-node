@@ -10,5 +10,6 @@ set(BOARD_SOURCES
 if(BOARD_GPIO STREQUAL "RASPBERRY_PI")
 find_package(WiringPi REQUIRED)
 include_directories(${WiringPi_INCLUDE_DIRS})
-set(BOARD_LIBS ${WIRINGPI_LIBRARIES})
+set(RPI_LIBS rt)
+set(BOARD_LIBS ${WIRINGPI_LIBRARIES} ${RPI_LIBS})
 endif()
